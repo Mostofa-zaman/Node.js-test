@@ -24,18 +24,7 @@ app.use(express.json())
 // })
 
 
-app.get("/bankamount", (req,res,next)=>{
-    let password = "278tye827eu9hf"
-    let pss = req.headers.authorization
-
-    if (password === pss) {
-        next()
-    } else {
-        res.send("Invalid password")
-    }
-},(req,res)=>{
- res.send("first")
-})
+app.get("/bankamount",)
 
 app.listen(5000,()=>{
     console.log("server is running")
