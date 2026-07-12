@@ -1,48 +1,42 @@
-const express = require("express");
-const app = express();
-app.use(express.json());
+const express = require("express")
+const app = express()
+
+app.use(express.json())
+
+// app.post("/registration", (req, res)=>{
+//    const {username ,email, password}= req.body
+
+//    if(!username){
+//     res.send( "username is required")
+//    }
+//    if(!email){
+//     res.send( "email is required")
+//    }
+//    if(!password){
+//     res.send( "password is required")
+//    }
+// })
 
 
+// app.post('/login', (req, res)=>{
+//        const {email, password}= req.body
+//        res.send("")
+// })
 
-// // Registration
-// app.post("/registration", (req, res) => {
-//   const { username, email, password } = req.body;
 
-//   if (!username) {
-//     return res.send("Username is required");
-//   }
+app.get("/bankamount", (req,res,next)=>{
+    let password = "278tye827eu9hf"
+    let pss = req.headers.authorization
 
-//   if (!email) {
-//     return res.send("Email is required");
-//   }
-
-//   if (!password) {
-//     return res.send("Password is required");
-//   }
-
-//   return res.send("Registration successful");
-// });
-
-// // Login
-// app.post("/login", (req, res) => {
-//   const { email, password } = req.body;
-
-//   if (!email) {
-//     return res.send("Email is required");
-//   }
-
-//   if (!password) {
-//     return res.send("Password is required");
-//   }
-
-//   return res.send("Login successful");
-// });
-
-app.get("/bankamount", (req,res)=>{
-  console.log("first")
+    if (password === pss) {
+        next()
+    } else {
+        res.send("Invalid password")
+    }
+},(req,res)=>{
+ res.send("first")
 })
 
-
-app.listen(5000, () => {
-  console.log("Server is running on http://localhost:5000");
-});
+app.listen(5000,()=>{
+    console.log("server is running")
+})
