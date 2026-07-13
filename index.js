@@ -1,6 +1,7 @@
 const express = require("express")
 const app = express()
-
+const secureMiddleware = require("./middleware/secureMiddleware");
+const registrationController = require("./controllers/registrationController")
 app.use(express.json())
 
 // app.post("/registration", (req, res)=>{
@@ -24,7 +25,7 @@ app.use(express.json())
 // })
 
 
-app.get("/bankamount",)
+app.get("/registration",registrationController)
 
 app.listen(5000,()=>{
     console.log("server is running")
