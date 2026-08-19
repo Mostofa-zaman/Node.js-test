@@ -6,7 +6,7 @@ const mongoose = require("mongoose");
 const app = express();
 
 const secureMiddleware = require("./middleware/secureMiddleware");
-const {registrationController,allUsersController,updateUser} = require("./controllers/registrationController");
+const {registrationController,allUsersController,deleteUser,updateUser} = require("./controllers/registrationController");
 
 // MongoDB connection
 mongoose
@@ -27,6 +27,7 @@ app.use(express.json());
 app.post("/registration", registrationController);
 app.get("/allusers", allUsersController);
 app.post("/update/:id",updateUser)
+app.delete("/user/:id", deleteUser);
 
 // Server
 app.listen(5000, () => {

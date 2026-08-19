@@ -34,4 +34,13 @@ const updateUser = async (req, res) => {
   res.send("data updated");
 };
 
-module.exports = { registrationController, allUsersController, updateUser };
+// delete controller
+const deleteUser = async (req, res) => {
+  const { id } = req.params;
+
+  await User.findByIdAndDelete(id);
+
+  res.send("user deleted");
+};
+
+module.exports = { registrationController, allUsersController, updateUser, deleteUser };
