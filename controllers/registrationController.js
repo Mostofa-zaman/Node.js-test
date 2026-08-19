@@ -1,25 +1,26 @@
-require("node:dns").setServers(["1.1.1.1", "8.8.8.8"]);
+    const User = require("../model/userModel");
 
-const express = require("express");
-const mongoose = require("mongoose");
+    const registrationController = async (req, res) => {
 
-const app = express();
+            const { username, email, password } = req.body;
 
-const { registrationController } = require("./controllers/registrationController");
+            const existingUser = await User.findOne({email:email})
 
-mongoose
-  .connect("YOUR_MONGODB_CONNECTION_STRING")
-  .then(() => {
-    console.log("database connected");
-  })
-  .catch((error) => {
-    console.log("database connection failed:", error);
-  });
+            if(existingUser) {
+                return res.send("user already exists")
+            }
+            const user = new User({
+                username: username,
+                email: email,
+                password: password
+            });
 
-app.use(express.json());
+        user.save()
 
-app.post("/registration", registrationController);
+            res.send(user);
 
-app.listen(5000, () => {
-  console.log("server is running on port 5000");
-});
+        }
+
+
+
+    module.exports = {registrationController, };
