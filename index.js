@@ -23,7 +23,7 @@ mongoose
 // JSON middleware
 app.use(express.json());
 
-// Registration route
+// Registration routes
 app.post("/registration", registrationController);
 app.get("/allusers", allUsersController);
 app.post("/update/:id",updateUser)
