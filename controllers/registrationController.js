@@ -25,4 +25,13 @@ const allUsersController = async (req, res) => {
   res.send(data);
 };
 
-module.exports = { registrationController, allUsersController };
+// data update controller
+const updateUser = async (req, res) => {
+  const { id } = req.params;
+
+  let data = await User.findByIdAndUpdate({ _id: id }, req.body);
+
+  res.send("data updated");
+};
+
+module.exports = { registrationController, allUsersController, updateUser };
