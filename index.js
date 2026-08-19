@@ -6,7 +6,7 @@ const mongoose = require("mongoose");
 const app = express();
 
 const secureMiddleware = require("./middleware/secureMiddleware");
-const {registrationController} = require("./controllers/registrationController");
+const {registrationController,allUsersController} = require("./controllers/registrationController");
 
 // MongoDB connection
 mongoose
@@ -25,10 +25,10 @@ app.use(express.json());
 
 // Registration route
 app.post("/registration", registrationController);
-
+app.get("/allusers", allUsersController);
 
 
 // Server
 app.listen(5000, () => {
-  console.log("server is running ");
+  console.log("server is running on port 5000");
 });
