@@ -1,32 +1,34 @@
-const express = require("express")
-const app = express()
+require("node:dns").setServers(["1.1.1.1", "8.8.8.8"]);
+
+const express = require("express");
+const mongoose = require("mongoose");
+
+const app = express();
+
 const secureMiddleware = require("./middleware/secureMiddleware");
-const registrationController = require("./controllers/registrationController")
-app.use(express.json())
+const {registrationController} = require("./controllers/registrationController");
 
-// app.post("/registration", (req, res)=>{
-//    const {username ,email, password}= req.body
+// MongoDB connection
+mongoose
+  .connect(
+    "mongodb+srv://mostofa:30mostofaZ%40man@cluster0.ftrvtub.mongodb.net/tudo?appName=Cluster0"
+  )
+  .then(() => {
+    console.log("database connected");
+  })
+  .catch((error) => {
+    console.log("database connection failed:", error);
+  });
 
-//    if(!username){
-//     res.send( "username is required")
-//    }
-//    if(!email){
-//     res.send( "email is required")
-//    }
-//    if(!password){
-//     res.send( "password is required")
-//    }
-// })
+// JSON middleware
+app.use(express.json());
 
-
-// app.post('/login', (req, res)=>{
-//        const {email, password}= req.body
-//        res.send("")
-// })
+// Registration route
+app.post("/registration", registrationController);
 
 
-app.get("/registration",registrationController)
 
-app.listen(5000,()=>{
-    console.log("server is running")
-})
+// Server
+app.listen(5000, () => {
+  console.log("server is running ");
+});
